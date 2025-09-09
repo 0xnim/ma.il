@@ -1,0 +1,93 @@
+<head>
+    <title>GurtMail</title>
+    <meta name="theme-color" content="#0f172a" />
+    <style>
+        body { bg-slate-900 text-slate-100 font-sans }
+        .card { bg-slate-800 rounded-lg p-4 border border-slate-700 }
+        .pill { rounded-full px-2 py-0.5 text-sm border border-slate-600 text-slate-400 }
+        .pill.ok { bg-green-900 text-green-300 border-green-700 }
+        .pill.warn { bg-yellow-900 text-yellow-400 border-yellow-700 }
+        .pill.err { bg-red-900 text-red-400 border-red-700 }
+        .message { bg-slate-900 p-3 rounded border border-slate-700 whitespace-pre-wrap }
+        pre { bg-slate-900 border border-slate-700 p-2 rounded mt-2 text-xs whitespace-pre-wrap }
+    </style>
+    <script src="gurtmail.lua" />
+</head>
+
+<body style="flex flex-col gap-4 p-6 max-w-[1100px] mx-auto">
+<h1 style="text-3xl font-bold">GurtMail</h1>
+<p style="text-slate-400">Auth, domain verification, addresses, inbox & outbox.</p>
+
+<div style="flex flex-row gap-4">
+    <!-- Auth -->
+    <div class="card flex-1">
+        <h2 style="text-xl font-bold mb-2">Auth</h2>
+        <div style="flex gap-2">
+            <input id="username" type="text" placeholder="yourname" style="flex-1" />
+            <input id="password" type="password" placeholder="••••••••" style="flex-1" />
+        </div>
+        <div style="flex gap-2 mt-2">
+            <button id="register" style="bg-blue-500 text-white rounded px-3 py-1">Register</button>
+            <button id="login" style="bg-slate-700 text-white rounded px-3 py-1">Login</button>
+        </div>
+        <p id="authState" style="text-sm text-slate-400 mt-2">Not signed in.</p>
+    </div>
+
+    <!-- Domains -->
+    <div class="card flex-1">
+        <div style="flex items-center gap-2 mb-2">
+            <h2 style="text-xl font-bold">Domains</h2>
+            <span id="domCount" class="pill">0</span>
+        </div>
+        <div style="flex gap-2">
+            <input id="fqdn" type="text" placeholder="example.web" style="flex-1" />
+            <button id="addDomain" style="bg-blue-500 text-white rounded px-3 py-1">Add</button>
+        </div>
+        <div id="domains" style="flex flex-col gap-2 mt-2"></div>
+    </div>
+
+    <!-- Addresses -->
+    <div class="card flex-1">
+        <div style="flex items-center gap-2 mb-2">
+            <h2 style="text-xl font-bold">Addresses</h2>
+            <span id="addrCount" class="pill">0</span>
+        </div>
+        <div id="addresses" style="flex flex-col gap-2"></div>
+        <button id="refreshAddrs" style="border border-slate-600 rounded px-2 py-1 mt-2">Refresh</button>
+    </div>
+</div>
+
+<div style="flex flex-row gap-4">
+    <!-- Compose -->
+    <div class="card flex-1">
+        <h2 style="text-xl font-bold mb-2">Compose</h2>
+        <input id="fromAddr" type="text" placeholder="your@email.web" style="mb-2" />
+        <input id="to" type="text" placeholder="recipient@domain.web" style="mb-2" />
+        <input id="subject" type="text" placeholder="Subject" style="mb-2" />
+        <textarea id="body" placeholder="Write your message..." rows="6" style="mb-2"></textarea>
+        <button id="send" style="bg-blue-500 text-white rounded px-3 py-1">Send</button>
+    </div>
+
+    <!-- Inbox -->
+    <div class="card flex-1">
+        <div style="flex justify-between items-center mb-2">
+            <h2 style="text-xl font-bold">Inbox</h2>
+            <button id="refreshInbox" style="border border-slate-600 rounded px-2 py-1">Refresh</button>
+        </div>
+        <div id="inbox" style="flex flex-col gap-2"></div>
+    </div>
+</div>
+
+<!-- Outbox -->
+<div class="card">
+    <div style="flex justify-between items-center mb-2">
+        <h2 style="text-xl font-bold">Outbox</h2>
+        <button id="refreshOutbox" style="border border-slate-600 rounded px-2 py-1">Refresh</button>
+    </div>
+    <div id="outbox" style="flex flex-col gap-2"></div>
+</div>
+
+<div style="text-center text-slate-500 text-sm mt-4">
+    Hello :)
+</div>
+</body>
